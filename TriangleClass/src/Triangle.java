@@ -22,9 +22,11 @@ public class Triangle{
 		
 		if (_sideA + _sideB > _sideC && _sideA + _sideC > _sideB && _sideB + _sideC > _sideA){
 			isTriangleValid = true;
+			System.out.println("T");
 		}
 		else{
 			isTriangleValid = false;
+			System.out.println("F");
 		}
 	}
 	
@@ -53,10 +55,9 @@ public class Triangle{
 		Triangle._memberName = _memberName;
 	}
 	
-	protected String TypeOfTriangle(){
+	protected void TypeOfTriangle(){
 		if (_sideA == _sideB && _sideA == _sideC){
 			Triangle.set_memberName("Equilateral");
-			return "Equilateral";
 		}
 		else if (_sideA == _sideB || _sideB == _sideC || _sideA == _sideC){
 			Triangle.set_memberName("Isosceles");
@@ -67,7 +68,7 @@ public class Triangle{
 		else{
 			Triangle.set_memberName("Scalene");
 		}
-		return Triangle.get_memberName();
+		//return Triangle.get_memberName();
 	}
 	
 	protected void GetPerimeter(){
