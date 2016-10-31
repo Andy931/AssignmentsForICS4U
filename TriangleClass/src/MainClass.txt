@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class MainClass {
+	public static void Main(String[] args){
+		double sideA, sideB, sideC;
+		
+		Scanner sc = new Scanner(System.in);
+		sideA = sc.nextDouble();
+		sideB = sc.nextDouble();
+		sideC = sc.nextDouble();
+		
+		sc.close();
+		
+		Triangle triangle = new Triangle(sideA, sideB, sideC);
+		
+		
+		//System.out.println(Triangle.get_area(), Triangle.get_perimeter());
+		System.out.printf(Double.toString(Triangle.get_area()), Double.toString(Triangle.get_perimeter()), Triangle.get_memberName());
+	}
+}
