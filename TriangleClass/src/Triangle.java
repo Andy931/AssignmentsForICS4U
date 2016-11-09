@@ -1,3 +1,12 @@
+/****************************************************************************
+ *
+ * Created by: Andy Liu
+ * Created on: Oct 30, 2016
+ * Created for: ICS4U
+ * Assignment #4b
+ * This program is a class for the MainClass
+ *
+ ****************************************************************************/
 
 public class Triangle{
 	//Private Fields
@@ -7,78 +16,83 @@ public class Triangle{
 	private static double _semiperimeter;
 	private static double _perimeter;
 	private static double _area;
-	private static String _memberName;
+	private static String _typeName;
 	
 	//Constructor
 	public Triangle(double a, double b, double c){
 		_sideA = a;
 		_sideB = b;
 		_sideC = c;
-	}
+	}  //Pass the parameters
 	
 	//Methods
-	protected void IsTriangleValid(){
+	//Determine if the triangle is valid
+	protected boolean IsTriangleValid(){
 		boolean isTriangleValid;
 		
 		if (_sideA + _sideB > _sideC && _sideA + _sideC > _sideB && _sideB + _sideC > _sideA){
 			isTriangleValid = true;
-			System.out.println("T");
+			return isTriangleValid;
 		}
 		else{
 			isTriangleValid = false;
-			System.out.println("F");
+			return isTriangleValid;
 		}
 	}
 	
-	//Setter & Getter
-	public static double get_area() {
-		return _area;
-	}
-
-	public static void set_area(double _area) {
-		Triangle._area = _area;
-	}
-
-	public static double get_perimeter() {
-		return _perimeter;
-	}
-
-	public static void set_perimeter(double _perimeter) {
-		Triangle._perimeter = _perimeter;
-	}
-
-	public static String get_memberName() {
-		return _memberName;
-	}
-
-	public static void set_memberName(String _memberName) {
-		Triangle._memberName = _memberName;
-	}
-	
-	protected void TypeOfTriangle(){
+	//Determine the type of a triangle
+	protected String TypeOfTriangle(){
 		if (_sideA == _sideB && _sideA == _sideC){
-			Triangle.set_memberName("Equilateral");
+			_typeName = "Equilateral";
 		}
 		else if (_sideA == _sideB || _sideB == _sideC || _sideA == _sideC){
-			Triangle.set_memberName("Isosceles");
+			_typeName = "Isosceles";
 		}
 		else if (_sideA*_sideA==_sideB*_sideB+_sideC*_sideC || _sideB*_sideB==_sideA*_sideA+_sideC*_sideC || _sideC*_sideC==_sideA*_sideA+_sideB*_sideB){
-			Triangle.set_memberName("Right-angle");
+			_typeName = "Right-angle";
 		}
 		else{
-			Triangle.set_memberName("Scalene");
+			_typeName = "Scalene";
 		}
-		//return Triangle.get_memberName();
+		return _typeName;
 	}
 	
-	protected void GetPerimeter(){
-		Triangle.set_perimeter(_sideA + _sideB +_sideC);
+	//Calculate the perimeter
+	protected double GetPerimeter(){
+		_perimeter = _sideA + _sideB +_sideC;
+		return _perimeter;
 	}
 	
-	protected void GetArea(){
-		Triangle._semiperimeter = get_perimeter() / 2;
-		Triangle.set_area(Math.sqrt(_semiperimeter*(_semiperimeter - _sideA)*(_semiperimeter - _sideB)*(_semiperimeter - _sideC)));
+	//Calculate the area
+	protected double GetArea(){
+		_semiperimeter = _perimeter / 2;
+		_area = Math.round(Math.sqrt(_semiperimeter*(_semiperimeter - _sideA)*(_semiperimeter - _sideB)*(_semiperimeter - _sideC)) * 100.0) / 100.0;
+		return _area;
 	}
-
 	
+	//Height of the triangle
+	public void TriangleHeight(){
+		double heightA = Math.round(_area*2/_sideA * 100.0) / 100.0;
+		double heightB = Math.round(_area*2/_sideB * 100.0) / 100.0;
+		double heightC = Math.round(_area*2/_sideC * 100.0) / 100.0;
+		
+		System.out.println("This triangle have 3 heights: "+heightA+", "+heightB+", "+heightC);
+	}
+	
+	//The largest inscribed circle
+	public void LargestInscribedCircle(){
+		double radius = Math.round(_area / _semiperimeter * 100.0) / 100.0;
+		double inscribedCircleArea = Math.round(radius * radius * 3.14 * 100.0) / 100.0;
+		
+		System.out.println("The radius of the largest inscribed circle that can fit inside the triangle: " + radius);
+		System.out.println("The area of the largest inscribed circle that can fit inside the triangle: " + inscribedCircleArea);
+	}
+	
+	//Circumcircle of the triangle
+	public void AreaOfTheCircumcircleOfTheTriangle(){
+		double radiusOfCircumcircleOfTheTriangle = Math.round(_sideA*_sideB*_sideC / 4 / _area * 100.0) / 100.0;
+		double areaOfCircumcircleOfTheTriangle = Math.round(3.14 * radiusOfCircumcircleOfTheTriangle * radiusOfCircumcircleOfTheTriangle * 100.0) / 100.0;
+		System.out.println("The area of the circumcircle of the triangle: " + areaOfCircumcircleOfTheTriangle);
+	}
 }
+
