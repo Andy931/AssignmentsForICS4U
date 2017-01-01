@@ -1,0 +1,136 @@
+import java.util.*;
+import java.util.stream.IntStream;
+
+/****************************************************************************
+ *
+ * Created by: Andy Liu
+ * Created on: Nov 24, 2016
+ * Created for: ICS4U
+ * Assignment #6b
+ * This program is a class for Yahtzee Game
+ *
+ ****************************************************************************/
+
+public class YahtzeeGame {
+	public static int[] arrayOfDice;
+	public static int[] scorePad;
+	
+	//Methods
+	//Roll dice
+	protected void RollDice(){
+		Random random = new Random();
+		
+		for (int counter = 1; counter <= arrayOfDice.length; counter++){
+			int number = random.nextInt(6);
+			arrayOfDice[counter]=number;
+		}
+	}
+	
+	//Sum
+	protected void Sum(){
+		int sum = 0;
+		for (int counter = 0; counter <= arrayOfDice.length; counter++){
+			sum = sum + arrayOfDice[counter];
+		}
+		scorePad[0] = sum;
+		scorePad[1] = sum;
+		scorePad[6] = sum;
+	}
+	
+	//Full House
+	protected void FullHouse(){
+		Arrays.sort(arrayOfDice);
+		if (arrayOfDice[0] == arrayOfDice[1] && arrayOfDice[2] == arrayOfDice[3] && arrayOfDice[3] == arrayOfDice[4] || arrayOfDice[0] == arrayOfDice[1] && arrayOfDice[1] == arrayOfDice[2] && arrayOfDice[3] == arrayOfDice[4]){
+			scorePad[2] = 25;
+		}
+		System.out.println("Full House: " + scorePad[2]);
+	}
+	
+	//Straights
+	protected void Straights(){
+		if (arrayOfDice[0] == arrayOfDice[1] - 1 && arrayOfDice[1] == arrayOfDice[2] - 1 && arrayOfDice[2] == arrayOfDice[3] - 1){
+			if (arrayOfDice[3] == arrayOfDice[4] - 1){
+				scorePad[4] = 40;
+			}
+			else{
+				scorePad[3] = 30;
+			}
+		}
+		System.out.println("Small Straight: " + scorePad[3]);
+		System.out.println("Large Straight: " + scorePad[4]);
+	}
+	
+	//YAHTZEE & YAHTZEE Bonus
+	protected void Yahtzee(){
+		if (arrayOfDice[0] == arrayOfDice[1] && arrayOfDice[1] == arrayOfDice[2] && arrayOfDice[2] == arrayOfDice[3] && arrayOfDice[3] == arrayOfDice[4]){
+			if (scorePad[5] == 0){
+				scorePad[5] = 50;
+			}
+			else{
+				scorePad[7] = 100;
+			}
+		}
+		System.out.println("YAHTZEE: " + scorePad[5]);
+		System.out.println("YAHTZEE Bonus: " + scorePad[7]);
+	}
+	
+	//Lower Section Sum
+	protected void LowerSectionSum(){
+		int lowerSectionSum = 0;
+		for (int position = 0; position <= 7; position++){
+			lowerSectionSum = lowerSectionSum + scorePad[position];
+		}
+		//int lowerSectionSum = IntStream.of(scorePad).sum();
+		System.out.println("Lower Section Sum: " + lowerSectionSum);
+	}
+	
+	//UpperSection & Bonus
+	protected void UpperSection(){
+		int counterAces = 0;
+		int counterTwos = 0;
+		int counterThrees = 0;
+		int counterFours = 0;
+		int counterFives = 0;
+		int counterSixes = 0;
+		
+		for (int position = 0; position <= arrayOfDice.length; position++){
+			if (arrayOfDice[position] == 1){
+				counterAces++;
+			}
+			else if (arrayOfDice[position] == 2){
+				counterTwos++;
+			}
+			else if (arrayOfDice[position] == 3){
+				counterThrees++;
+			}
+			else if (arrayOfDice[position] == 4){
+				counterFours++;
+			}
+			else if (arrayOfDice[position] == 5){
+				counterFives++;
+			}
+			else{
+				counterSixes++;
+			}
+		}
+		scorePad[9] = counterAces * 1;
+		scorePad[10] = counterTwos * 2;
+		scorePad[11] = counterThrees * 3;
+		scorePad[12] = counterFours * 4;
+		scorePad[13] = counterFives * 5;
+		scorePad[14] = counterSixes * 6;
+		
+		System.out.println("Aces: " + scorePad[9] + "\n" + "Twos: " + scorePad[10] + "\n" + "Threes: " + scorePad[11] + "Fours: " + scorePad[12] + "Fives: " + scorePad[13] + "Sixes: " + scorePad[14]);
+		
+		if (scorePad[9] + scorePad[10] + scorePad[11] + scorePad[12] + scorePad[13] + scorePad[14] > 63){
+			scorePad[15] = 35;
+			System.out.println("You get a bonus: " + scorePad[15]);
+		}
+	}
+	
+	//Total Score
+	protected void GrandTotal(){
+		int grandTotal = IntStream.of(scorePad).sum();
+		System.out.println("Your total score: " + grandTotal);
+	}
+}
