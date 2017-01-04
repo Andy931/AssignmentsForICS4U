@@ -1,86 +1,16 @@
+/****************************************************************************
+ *
+ * Created by: Andy Liu
+ * Created on: Dec 14, 2016
+ * Created for: ICS4U
+ * Unit #5
+ * This is a class that define a Rubik's Cube 
+ * 
+ ****************************************************************************/
+
 import java.util.*;
-/*
-3D presentation of a Cube:
-                ______
-               /     /|
-              /  U  / |
-             /_____/  | B
-            |      |R |
-          L |   F  |  /
-            |      | /
-            |______|/
-                D
-
-2D presentation and array position of a Cube:
-            _______
-           | 11 12 |
-           |   U   |
-           | 21 22 |
-    _______|_______|_______________
-   | 11 12 | 11 12 | 11 12 | 11 12 |
-   |   L   |   F   |   R   |   B   |
-   | 21 22 | 21 22 | 21 22 | 21 22 |
-   |_______|_______|_______|_______|
-           | 11 12 |
-           |   D   |
-           | 21 22 |
-           |_______|
-
-            _______
-           | O   O |
-           |   U   |
-           | O   O |
-    _______|_______|_______________
-   | G   G | W   W | B   B | Y   Y |
-   |   L   |   F   |   R   |   B   |
-   | G   G | W   W | B   B | Y   Y |
-   |_______|_______|_______|_______|
-           | R   R |
-           |   D   |
-           | R   R |
-           |_______|
-
-Cube: W=white, O=orange, G=green, R=Red, B=Blue, Y=Yellow  
-Center: F=front, B=back, U=up, D=down, L=left, R=right
-*/
-
-/* Cube 2D expand image
-         _______
-        | 11 12 |
-        |   U   |
-        | 21 22 |
- _______|_______|_______________
-| 11 12 | 11 12 | 11 12 | 11 12 |
-|   L   |   F   |   R   |   B   |
-| 21 22 | 21 22 | 21 22 | 21 22 |
-|_______|_______|_______|_______|
-        | 11 12 |
-        |   D   |
-        | 21 22 |
-        |_______|
-        | 22 21 |
-        |   B   |
-        | 12 11 |
-        |_______|
- */
-/* Rotate Methods: 
-F :Rotate_F()
-F':Rotate_Fc()
-B :Rotate_B()
-B':Rotate_Bc()
-U :Rotate_U()
-U':Rotate_Uc()
-D :Rotate_D()
-D':Rotate_Dc()
-L :Rotate_L()
-L':Rotate_Lc()
-R :Rotate_R()
-R':Rotate_Rc()
-*/
-
 
 public class CubeClass {
-
 
 		public char[][] Cube_F = new char[3][3];
 		public char[][] Cube_B = new char[3][3];
@@ -89,8 +19,6 @@ public class CubeClass {
 		public char[][] Cube_L = new char[3][3];
 		public char[][] Cube_R = new char[3][3];
 	
-		
-		
 		protected void CubePrint2D(){
 	    			
 		    
@@ -160,40 +88,40 @@ public class CubeClass {
 				//System.out.print(" "+move+" ");
 				switch (move){
 					case 1:
-						cube.Rotate_F(cube);
+						cube.RotateFront(cube);
 						break;
 					case 2:
-						cube.Rotate_Fc(cube);
+						cube.RotateFrontC(cube);
 						break;
 					case 3:
-						cube.Rotate_U(cube);
+						cube.RotateUp(cube);
 						break;
 					case 4:	
-						cube.Rotate_Uc(cube);
+						cube.RotateUpC(cube);
 						break;
 					case 5:
-						cube.Rotate_L(cube);
+						cube.RotateLeft(cube);
 						break;
 					case 6:
-						cube.Rotate_Lc(cube);
+						cube.RotateLeftC(cube);
 						break;
 					case 7:
-						cube.Rotate_B(cube);
+						cube.RotateBack(cube);
 						break;
 					case 8:
-						cube.Rotate_Bc(cube);
+						cube.RotateBackC(cube);
 						break;
 					case 9:
-						cube.Rotate_D(cube);
+						cube.RotateDown(cube);
 						break;
 					case 10:
-						cube.Rotate_Dc(cube);
+						cube.RotateDownC(cube);
 						break;
 					case 11:
-						cube.Rotate_R(cube);
+						cube.RotateRight(cube);
 						break;
 					case 12:
-						cube.Rotate_Rc(cube);
+						cube.RotateRightC(cube);
 						break;
 				}
 
@@ -205,7 +133,7 @@ public class CubeClass {
 		
 		
 		// Front face rotate clockwise 90 degree
-		protected void Rotate_F(CubeClass cube){
+		protected void RotateFront(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("F");
@@ -236,7 +164,7 @@ public class CubeClass {
 		}	
 	
 		// Front face rotate counterclockwise 90 degree
-		protected void Rotate_Fc(CubeClass cube){
+		protected void RotateFrontC(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("F'");
@@ -268,7 +196,7 @@ public class CubeClass {
 		
 		
 		// Up face rotate clockwise 90 degree
-		protected void Rotate_U(CubeClass cube){
+		protected void RotateUp(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("U");
@@ -299,7 +227,7 @@ public class CubeClass {
 		}	
 	
 		// Up face rotate counterclockwise 90 degree
-		protected void Rotate_Uc(CubeClass cube){
+		protected void RotateUpC(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("U'");
@@ -331,7 +259,7 @@ public class CubeClass {
 		
 		
 		// Left face rotate clockwise 90 degree
-		protected void Rotate_L(CubeClass cube){
+		protected void RotateLeft(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("L");
@@ -362,7 +290,7 @@ public class CubeClass {
 		}	
 	
 		// Left face rotate counterclockwise 90 degree
-		protected void Rotate_Lc(CubeClass cube){
+		protected void RotateLeftC(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("L'");
@@ -393,7 +321,7 @@ public class CubeClass {
 		}
 		
 		// Back face rotate clockwise 90 degree
-		protected void Rotate_B(CubeClass cube){
+		protected void RotateBack(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("B");
@@ -424,7 +352,7 @@ public class CubeClass {
 		}	
 	
 		// Back face rotate counterclockwise 90 degree
-		protected void Rotate_Bc(CubeClass cube){
+		protected void RotateBackC(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("B'");
@@ -455,7 +383,7 @@ public class CubeClass {
 		}
 		
 		// Down face rotate clockwise 90 degree
-		protected void Rotate_D(CubeClass cube){
+		protected void RotateDown(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("D");
@@ -486,7 +414,7 @@ public class CubeClass {
 		}	
 	
 		// Down face rotate counterclockwise 90 degree
-		protected void Rotate_Dc(CubeClass cube){
+		protected void RotateDownC(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("D'");
@@ -518,7 +446,7 @@ public class CubeClass {
 		
 		
 		// Right face rotate clockwise 90 degree
-		protected void Rotate_R(CubeClass cube){
+		protected void RotateRight(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("R");
@@ -549,7 +477,7 @@ public class CubeClass {
 		}	
 	
 		// Right face rotate counterclockwise 90 degree
-		protected void Rotate_Rc(CubeClass cube){
+		protected void RotateRightC(CubeClass cube){
 			char cTemp1, cTemp2;
 			
 			System.out.print("R'");
@@ -580,11 +508,11 @@ public class CubeClass {
 		}	
 
 		
-		//Rotate_Rubik_Clockwise Clockwise 90 degree from front side
-		protected void RotateRubikClockwise(CubeClass cube){
+		//Rotate_Cube_Clockwise 90 degree from front side
+		protected void RotateCubeClockwise(CubeClass cube){
 			char cTemp1, cTemp2,cTemp3,cTemp4;
 			
-			System.out.println("Rotate_Rubik_Clockwise-90");
+			System.out.println("Rotate cube Clockwise by 90 Degree");
 
 			cTemp1 = cube.Cube_U[1][1];
 			cTemp2 = cube.Cube_U[1][2];
@@ -626,11 +554,11 @@ public class CubeClass {
 		}	
 		
 		
-		//Rotate_Rubik_Horizon clockwise 90 degree from D side
-		protected void RotateRubikHorizon(CubeClass cube){
+		//Rotate_Cube_Horizontally clockwise 90 degree from D side
+		protected void RotateCubeHorizontally(CubeClass cube){
 			char cTemp1;
 			
-			System.out.println("Rotate_Rubik_Horizon-90");
+			System.out.println("Rotate Cube Horizontally clockwise by 90 Degree");
 			
 			for (int i = 1; i<=2; i++){
 				for (int j = 1; j<=2; j++){
@@ -657,11 +585,11 @@ public class CubeClass {
 
 		}	
 		
-		//Rotate_Rubik_Vertical clockwise 90 degree from R side
-		protected void RotateRubikVertical(CubeClass cube){
+		//Rotate_Cube_Vertical clockwise 90 degree from R side
+		protected void RotateCubeVertically(CubeClass cube){
 			char cTemp1;
 			
-			System.out.println("Rotate_Rubik_Vertical-90");
+			System.out.println("Rotate cube Vertically clockwise by 90 Degree");
 			
 			for (int i = 1; i<=2; i++){
 				for (int j = 1; j<=2; j++){
@@ -687,13 +615,9 @@ public class CubeClass {
 			cube.Cube_L[2][1] = cTemp1;
 
 		}
-
-		protected void CubeCheck(CubeClass cube){
-			
-		}
 		
 		//Rotate cube sides using sequence
-		protected void RotateCubeSequence(String RotateSeq, CubeClass cubes){
+		protected void RotateCubeSequence(String RotateSeq, CubeClass cube){
 			
 			for (int i=0; i<RotateSeq.length(); i++){
 
@@ -702,72 +626,72 @@ public class CubeClass {
 					case 'F': 
 					{
 						if (i==RotateSeq.length()-1)
-							cubes.Rotate_F(cubes);
+							cube.RotateFront(cube);
 						else 
 							if (RotateSeq.charAt(i+1)=='\'')
-								cubes.Rotate_Fc(cubes);
+								cube.RotateFrontC(cube);
 							else
-								cubes.Rotate_F(cubes);
+								cube.RotateFront(cube);
 						break;
 					}
 				
 					case 'B': 
 					{
 						if (i==RotateSeq.length()-1)
-							cubes.Rotate_B(cubes);
+							cube.RotateBack(cube);
 						else 
 							if (RotateSeq.charAt(i+1)=='\'')
-								cubes.Rotate_Bc(cubes);
+								cube.RotateBackC(cube);
 							else
-								cubes.Rotate_B(cubes);
+								cube.RotateBack(cube);
 						break;
 					}
 					
 					case 'U': 
 					{
 						if (i==RotateSeq.length()-1)
-							cubes.Rotate_U(cubes);
+							cube.RotateUp(cube);
 						else 
 							if (RotateSeq.charAt(i+1)=='\'')
-								cubes.Rotate_Uc(cubes);
+								cube.RotateUpC(cube);
 							else
-								cubes.Rotate_U(cubes);
+								cube.RotateUp(cube);
 						break;
 					}
 					
 					case 'D': 
 					{
 						if (i==RotateSeq.length()-1)
-							cubes.Rotate_D(cubes);
+							cube.RotateDown(cube);
 						else 
 							if (RotateSeq.charAt(i+1)=='\'')
-								cubes.Rotate_Dc(cubes);
+								cube.RotateDownC(cube);
 							else
-								cubes.Rotate_D(cubes);
+								cube.RotateDown(cube);
 						break;
 					}
 					
 					case 'L': 
 					{
 						if (i==RotateSeq.length()-1)
-							cubes.Rotate_L(cubes);
+							cube.RotateLeft(cube);
 						else 
 							if (RotateSeq.charAt(i+1)=='\'')
-								cubes.Rotate_Lc(cubes);
+								cube.RotateLeftC(cube);
 							else
-								cubes.Rotate_L(cubes);
+								cube.RotateLeft(cube);
 						break;
 					}
 					
 					case 'R': 
 					{
 						if (i==RotateSeq.length()-1)
-							cubes.Rotate_R(cubes);
+							cube.RotateRight(cube);
 						else 
 							if (RotateSeq.charAt(i+1)=='\'')
-								cubes.Rotate_Rc(cubes);
+								cube.RotateRightC(cube);
 							else
-								cubes.Rotate_R(cubes);
+								cube.RotateRight(cube);
 						break;
 					}
 				}

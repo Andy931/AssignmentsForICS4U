@@ -1,8 +1,18 @@
+/****************************************************************************
+ *
+ * Created by: Andy Liu
+ * Created on: Dec 14, 2016
+ * Created for: ICS4U
+ * Unit #5
+ * This program solve a Rubik's Cube step by step 
+ * 
+ ****************************************************************************/
+
 import java.util.*;
 
 public class CubeRecoverer {
     
-    //Define 8 cubes color-combination code 
+    //Define 8 cube color-combination code 
 	public static int WRG = 16077;
 	public static int WRB = 15862;
 	public static int YRB = 19038;
@@ -14,7 +24,7 @@ public class CubeRecoverer {
 
     public static int [] CubeCode = new int[9];
 
-    protected static void Recovery(CubeClass cube){
+    protected static void CubeSolver(CubeClass cube){
         String strSquence = "";
 
         System.out.println("******Recovering******");
@@ -30,52 +40,52 @@ public class CubeRecoverer {
             break;
 
             case 2: {
-                cube.RotateRubikHorizon(cube);
-                cube.RotateRubikHorizon(cube);
-                cube.RotateRubikHorizon(cube);
+                cube.RotateCubeHorizontally(cube);
+                cube.RotateCubeHorizontally(cube);
+                cube.RotateCubeHorizontally(cube);
                 RotateWOBinF21(cube);
                 break;
             }
 
             case 3: {
-                cube.RotateRubikHorizon(cube);
-                cube.RotateRubikHorizon(cube);
+                cube.RotateCubeHorizontally(cube);
+                cube.RotateCubeHorizontally(cube);
                 RotateWOBinF21(cube);
                 break;
             }
 
             case 4: {
-                cube.RotateRubikHorizon(cube);
+                cube.RotateCubeHorizontally(cube);
                 RotateWOBinF21(cube);
                 break;
             }
 
             case 5: {
-                cube.RotateRubikVertical(cube);
-                cube.RotateRubikVertical(cube);
-                cube.RotateRubikVertical(cube);
+                cube.RotateCubeVertically(cube);
+                cube.RotateCubeVertically(cube);
+                cube.RotateCubeVertically(cube);
                 RotateWOBinF21(cube);
                 break;
             }
 
             case 6: {
-                cube.RotateRubikClockwise(cube);
-                cube.RotateRubikClockwise(cube);
+                cube.RotateCubeClockwise(cube);
+                cube.RotateCubeClockwise(cube);
                 RotateWOBinF21(cube);
                 break;
             }
 
             case 7: {
-                cube.RotateRubikClockwise(cube);
-                cube.RotateRubikHorizon(cube);
-                cube.RotateRubikHorizon(cube);
+                cube.RotateCubeClockwise(cube);
+                cube.RotateCubeHorizontally(cube);
+                cube.RotateCubeHorizontally(cube);
                 RotateWOBinF21(cube);
                 break;
             }
 
             case 8: {
-                cube.RotateRubikVertical(cube);
-                cube.RotateRubikVertical(cube);
+                cube.RotateCubeVertically(cube);
+                cube.RotateCubeVertically(cube);
                 RotateWOBinF21(cube);
                 break;
             }
@@ -85,39 +95,39 @@ public class CubeRecoverer {
 
         cube.CubePrint(cube);
 
-        //Step 1-1
+        //Step 1-1: Find WRB cube and move to correct position and move to Position-5, then apply rotate sequence
         CubeSort(cube);
         System.out.println("Cube WRB position = "+FindCubePos(WRB));
         switch (FindCubePos(WRB)){
 			case 2: 
-				cube.Rotate_R(cube);
+				cube.RotateRight(cube);
 				break;
 
 			case 3: 
-				cube.Rotate_R(cube);
-				cube.Rotate_R(cube);
+				cube.RotateRight(cube);
+				cube.RotateRight(cube);
 				break;
 				
 			case 4:
-				cube.Rotate_B(cube);
-				cube.Rotate_B(cube);
-				cube.Rotate_Rc(cube);
+				cube.RotateBack(cube);
+				cube.RotateBack(cube);
+				cube.RotateRightC(cube);
 				break;
 				
 			case 5:
-				cube.Rotate_Uc(cube);
+				cube.RotateUpC(cube);
 				break;
 				
 			case 6:
 				break;
 				
 			case 7:
-				cube.Rotate_U(cube);
+				cube.RotateUp(cube);
 				break;
 				
 			case 8:
-				cube.Rotate_U(cube);
-				cube.Rotate_U(cube);
+				cube.RotateUp(cube);
+				cube.RotateUp(cube);
 				break;
 			default:
 				System.out.println("****Error 2");
@@ -126,17 +136,17 @@ public class CubeRecoverer {
 		strSquence=" ";
 		switch (cube.Cube_F[1][2]){
 			case 'B': 
-				//(R U R')
+				//Sequence 1-1: (R U R')
 				strSquence= "RUR'";
 				break;
 				
 			case 'W': 
-				//(F'U'F)
+				//Sequence 1-2: (F'U'F)
 				strSquence= "F'U'F";
 				break;
 			
 			case 'R': 
-				//(R U R')(R U R') U' (R U R')
+				//Sequence 1-3: (R U R')(R U R') U' (R U R')
 				strSquence= "RUR'RUR'U'RUR'";
 				break;
 				
@@ -148,37 +158,36 @@ public class CubeRecoverer {
 		cube.CubePrint(cube);
 		
 		
-		//Step 1-2: Find WRG cube and move to correct position
-		//  and move to Position-5, then apply rotate sequence
-		cube.RotateRubikHorizon(cube);
-		cube.RotateRubikHorizon(cube);
-		cube.RotateRubikHorizon(cube);
+		//Step 1-2: Find WRG cube and move to correct position and move to Position-5, then apply rotate sequence
+		cube.RotateCubeHorizontally(cube);
+		cube.RotateCubeHorizontally(cube);
+		cube.RotateCubeHorizontally(cube);
 		CubeSort(cube);
 		System.out.println("Cube WRG position = "+FindCubePos(WRG));
 		switch (FindCubePos(WRG)){
 			case 2: 
-				cube.Rotate_R(cube);
+				cube.RotateRight(cube);
 				break;
 
 			case 3: 
-				cube.Rotate_R(cube);
-				cube.Rotate_R(cube);
+				cube.RotateRight(cube);
+				cube.RotateRight(cube);
 				break;
 				
 			case 5:
-				cube.Rotate_Uc(cube);
+				cube.RotateUpC(cube);
 				break;
 				
 			case 6:
 				break;
 				
 			case 7:
-				cube.Rotate_U(cube);
+				cube.RotateUp(cube);
 				break;
 				
 			case 8:
-				cube.Rotate_U(cube);
-				cube.Rotate_U(cube);
+				cube.RotateUp(cube);
+				cube.RotateUp(cube);
 				break;
 			default:
 				System.out.println("****Error 4");
@@ -208,21 +217,20 @@ public class CubeRecoverer {
 		
 		cube.CubePrint(cube);
 		
-		//Step 1-3: Find WOG cube and move to correct position
-		//  and move to Position-5, then apply rotate sequence
-		cube.RotateRubikHorizon(cube);
-		cube.RotateRubikHorizon(cube);
-		cube.RotateRubikHorizon(cube);
+		//Step 1-3: Find WOG cube and move to correct position and move to Position-5, then apply rotate sequence
+		cube.RotateCubeHorizontally(cube);
+		cube.RotateCubeHorizontally(cube);
+		cube.RotateCubeHorizontally(cube);
 		CubeSort(cube);
 		System.out.println("Cube WOG position = "+FindCubePos(WOG));
 		boolean WOGcorrect = false;
 		switch (FindCubePos(WOG)){
 			case 2: 
 				if ((cube.Cube_F[2][2]=='W')||(cube.Cube_F[2][2]=='O')) {
-					cube.Rotate_R(cube);
-					cube.Rotate_U(cube);
-					cube.Rotate_Rc(cube);
-					cube.Rotate_Uc(cube);
+					cube.RotateRight(cube);
+					cube.RotateUp(cube);
+					cube.RotateRightC(cube);
+					cube.RotateUpC(cube);
 				}
 				else
 					if (cube.Cube_F[2][2]=='G'){
@@ -235,19 +243,19 @@ public class CubeRecoverer {
 				break;
 
 			case 5:
-				cube.Rotate_Uc(cube);
+				cube.RotateUpC(cube);
 				break;
 				
 			case 6:
 				break;
 				
 			case 7:
-				cube.Rotate_U(cube);
+				cube.RotateUp(cube);
 				break;
 				
 			case 8:
-				cube.Rotate_U(cube);
-				cube.Rotate_U(cube);
+				cube.RotateUp(cube);
+				cube.RotateUp(cube);
 				break;
 			default:
 				System.out.println("****Error 6");
@@ -279,13 +287,10 @@ public class CubeRecoverer {
 		}
 		
 		cube.CubePrint(cube);
-		// Complete Down side and 4 sides at down layer.
+		// Complete Down side and 4 sides at lower layer.
 		
 		
-		//Step 2: Complete Up side Yellow face
-		// Find WOG cube and move to correct position
-		//  and move to Position-5, then apply rotate sequence
-
+		//Step 2: Get top side filled with yellow
 		int n=0, numberofYellow=0;
 		
 		for (int i=1; i<=2; i++) {
@@ -310,7 +315,7 @@ public class CubeRecoverer {
 					if ((cube.Cube_F[1][1]=='Y')&&(cube.Cube_F[1][2]=='Y'))
 						break;
 					else
-						cube.Rotate_U(cube);
+						cube.RotateUp(cube);
 				}
 					
 				if ((cube.Cube_B[1][1]=='Y')&&(cube.Cube_B[1][2]=='Y'))
@@ -334,17 +339,17 @@ public class CubeRecoverer {
 					if (cube.Cube_U[2][2]=='Y')
 						break;
 					else
-						cube.Rotate_U(cube);
+						cube.RotateUp(cube);
 				}
 				
 				if ((cube.Cube_L[1][2]=='Y')&&(cube.Cube_B[1][2]=='Y')&&(cube.Cube_R[1][2]=='Y'))
-					// Figure 2-2: Sequence "R'UURUR'UR" 
+					// Condition 2-2: Sequence "R'UURUR'UR" 
 					{strSquence= "R'UURUR'UR";
 					SeqType = 22;}
 				else {
-					cube.Rotate_Uc(cube);
+					cube.RotateUpC(cube);
 					if ((cube.Cube_L[1][1]=='Y')&&(cube.Cube_F[1][1]=='Y')&&(cube.Cube_R[1][1]=='Y'))
-						// Figure 2-1: Sequence "RU'U'R'U'RU'R'" 
+						// Condition 2-1: Sequence "RU'U'R'U'RU'R'" 
 						{strSquence= "RU'U'R'U'RU'R'";
 						SeqType = 21;}
 					else
@@ -356,27 +361,27 @@ public class CubeRecoverer {
 			case 2: {
 				
 				if ((cube.Cube_U[1][2]=='Y')&&(cube.Cube_U[2][1]=='Y')){
-					// Figure 201: Sequence "RU'U'R'U'RU'R'"+U+"R'UURUR'UR"
+					// Condition 201: Sequence "RU'U'R'U'RU'R'"+U+"R'UURUR'UR"
 					strSquence= "RU'U'R'U'RU'R'UR'UURUR'UR";
 					SeqType = 201;
 					if ((cube.Cube_L[1][1]=='Y')&&(cube.Cube_F[1][2]=='Y')){
-						cube.Rotate_Uc(cube);
+						cube.RotateUpC(cube);
 					}
 					else {
 						if ((cube.Cube_R[1][1]=='Y')&&(cube.Cube_B[1][2]=='Y'))
-							cube.Rotate_U(cube);
+							cube.RotateUp(cube);
 						else
 							System.out.println("****Error 8-4");
 						}
 				}
 				else {
 					if ((cube.Cube_U[1][1]=='Y')&&(cube.Cube_U[2][2]=='Y')){
-						// Figure 201: Sequence "RU'U'R'U'RU'R'"+U+"R'UURUR'UR"
+						// Condition 201: Sequence "RU'U'R'U'RU'R'"+U+"R'UURUR'UR"
 						strSquence= "RU'U'R'U'RU'R'UR'UURUR'UR";
 						SeqType = 201;
 						if ((cube.Cube_L[1][2]=='Y')&&(cube.Cube_B[1][1]=='Y')){
-							cube.Rotate_U(cube);
-							cube.Rotate_U(cube);
+							cube.RotateUp(cube);
+							cube.RotateUp(cube);
 						}
 						else {
 							if ((cube.Cube_F[1][1]=='Y')&&(cube.Cube_R[1][2]=='Y'))
@@ -391,11 +396,11 @@ public class CubeRecoverer {
 							if ((cube.Cube_R[1][1]=='Y')&&(cube.Cube_R[1][2]=='Y'))
 								break;
 							else
-								cube.Rotate_U(cube);
+								cube.RotateUp(cube);
 						}
 						
 						if (rot < 4){  // rot<4 means find 2 yellow cube in R11&R12.
-							// Figure 203: Sequence "RU'U'R'U'RU'R'"+U2+"R'UURUR'UR"
+							// Condition 203: Sequence "RU'U'R'U'RU'R'"+U2+"R'UURUR'UR"
 							if ((cube.Cube_U[1][1]=='Y')&&(cube.Cube_U[2][1]=='Y'))
 								{strSquence= "RU'U'R'U'RU'R'UUR'UURUR'UR";
 								SeqType = 203;}
@@ -407,11 +412,11 @@ public class CubeRecoverer {
 								if ((cube.Cube_U[2][1]=='Y')&&(cube.Cube_U[2][2]=='Y'))
 									break;
 								else
-									cube.Rotate_U(cube);
+									cube.RotateUp(cube);
 							}
 							
 							if (rot < 4){  // rot<4 means find 2 yellow cube in U21&U22.
-								// Figure 202: Sequence "RU'U'R'U'RU'R'"+"R'UURUR'UR"
+								// Condition 202: Sequence "RU'U'R'U'RU'R'"+"R'UURUR'UR"
 								if ((cube.Cube_L[1][1]=='Y')&&(cube.Cube_R[1][2]=='Y'))
 									{strSquence= "RU'U'R'U'RU'R'R'UURUR'UR";
 									SeqType = 202;}
@@ -457,15 +462,15 @@ public class CubeRecoverer {
 			strSquence= "RB'RFFR'BRFFRR";	// Only this 1 sequence in Step 3.
 			
 			do {
-				// Check if has 2 same color cubes in one side at upper layer.
+				// Check if has 2 same color cube in one side at upper layer.
 				for (n=0; n<4; n++) {
 					if (cube.Cube_F[1][1] == cube.Cube_F[1][2])
 						break;
 					else
-						cube.Rotate_U(cube);
+						cube.RotateUp(cube);
 				}
 	
-				if (n >= 4){  // n=4 means no 2 same color cubes, apply Sequence "RB'RF2R'BRF2R2" first.
+				if (n >= 4){  // n=4 means no 2 same cube, apply Sequence "RB'RF2R'BRF2R2" first.
 					cube.RotateCubeSequence(strSquence, cube);	//apply rotate sequence
 				}
 			
@@ -476,37 +481,31 @@ public class CubeRecoverer {
 			cube.CubePrint(cube);
 		}
 		
-		// Adjust 4 sides cubes to make all them at the same color face.
-		for (n=0; n<4; n++) {
-			if (cube.Cube_F[1][1] == cube.Cube_F[2][1])
-				break;
-			else
-				cube.Rotate_U(cube);
-		}
+		CubeCheck(cube);
 		
 		cube.CubePrint(cube);
-		System.out.println("   *****   Completed   *****");
+		System.out.println("   *****   Completed!   *****");
     }
 
 
     //Rotate cube when WOB cube is in position F21
-    public static void RotateWOBinF21(CubeClass cubes){
-        switch (cubes.Cube_F[2][1]){
+    public static void RotateWOBinF21(CubeClass cube){
+        switch (cube.Cube_F[2][1]){
             case 'B': break;
             case 'O': {
-                cubes.RotateRubikClockwise(cubes);
-				cubes.RotateRubikClockwise(cubes);
-				cubes.RotateRubikClockwise(cubes);
-				cubes.RotateRubikHorizon(cubes);
-				cubes.RotateRubikHorizon(cubes);
-				cubes.RotateRubikHorizon(cubes);
+                cube.RotateCubeClockwise(cube);
+				cube.RotateCubeClockwise(cube);
+				cube.RotateCubeClockwise(cube);
+				cube.RotateCubeHorizontally(cube);
+				cube.RotateCubeHorizontally(cube);
+				cube.RotateCubeHorizontally(cube);
 				break;
             }
             case 'W': {
-                cubes.RotateRubikVertical(cubes);
-				cubes.RotateRubikVertical(cubes);
-				cubes.RotateRubikVertical(cubes);
-				cubes.RotateRubikHorizon(cubes);
+                cube.RotateCubeVertically(cube);
+				cube.RotateCubeVertically(cube);
+				cube.RotateCubeVertically(cube);
+				cube.RotateCubeHorizontally(cube);
 				break;
             }
         }
@@ -522,48 +521,48 @@ public class CubeRecoverer {
         return 0;
     }
 
-    //Calculate all corner cubes position
-    public static void CubeSort(CubeClass cubes){
+    //Calculate all corner cube position
+    public static void CubeSort(CubeClass cube){
         char[] ch1 = new char[3];
 
-        ch1[0] = cubes.Cube_F[2][1];
-		ch1[1] = cubes.Cube_D[1][1];
-		ch1[2] = cubes.Cube_L[2][2];
+        ch1[0] = cube.Cube_F[2][1];
+		ch1[1] = cube.Cube_D[1][1];
+		ch1[2] = cube.Cube_L[2][2];
 		CubeCode[1]= iStrSumCode(ch1);
 
-        ch1[0] = cubes.Cube_F[2][2];
-		ch1[1] = cubes.Cube_D[1][2];
-		ch1[2] = cubes.Cube_R[2][1];
+        ch1[0] = cube.Cube_F[2][2];
+		ch1[1] = cube.Cube_D[1][2];
+		ch1[2] = cube.Cube_R[2][1];
 		CubeCode[2] = iStrSumCode(ch1);
 		
-		ch1[0] = cubes.Cube_B[2][1];
-		ch1[1] = cubes.Cube_D[2][2];
-		ch1[2] = cubes.Cube_R[2][2];
+		ch1[0] = cube.Cube_B[2][1];
+		ch1[1] = cube.Cube_D[2][2];
+		ch1[2] = cube.Cube_R[2][2];
 		CubeCode[3] = iStrSumCode(ch1);
 				
-		ch1[0] = cubes.Cube_B[2][2];
-		ch1[1] = cubes.Cube_D[2][1];
-		ch1[2] = cubes.Cube_L[2][1];
+		ch1[0] = cube.Cube_B[2][2];
+		ch1[1] = cube.Cube_D[2][1];
+		ch1[2] = cube.Cube_L[2][1];
 		CubeCode[4] = iStrSumCode(ch1);
 		
-		ch1[0] = cubes.Cube_F[1][1];
-		ch1[1] = cubes.Cube_U[2][1];
-		ch1[2] = cubes.Cube_L[1][2];
+		ch1[0] = cube.Cube_F[1][1];
+		ch1[1] = cube.Cube_U[2][1];
+		ch1[2] = cube.Cube_L[1][2];
 		CubeCode[5] = iStrSumCode(ch1);
 		
-		ch1[0] = cubes.Cube_F[1][2];
-		ch1[1] = cubes.Cube_U[2][2];
-		ch1[2] = cubes.Cube_R[1][1];
+		ch1[0] = cube.Cube_F[1][2];
+		ch1[1] = cube.Cube_U[2][2];
+		ch1[2] = cube.Cube_R[1][1];
 		CubeCode[6] = iStrSumCode(ch1);
 		
-		ch1[0] = cubes.Cube_B[1][1];
-		ch1[1] = cubes.Cube_U[1][2];
-		ch1[2] = cubes.Cube_R[1][2];
+		ch1[0] = cube.Cube_B[1][1];
+		ch1[1] = cube.Cube_U[1][2];
+		ch1[2] = cube.Cube_R[1][2];
 		CubeCode[7] = iStrSumCode(ch1);
 		
-		ch1[0] = cubes.Cube_B[1][2];
-		ch1[1] = cubes.Cube_U[1][1];
-		ch1[2] = cubes.Cube_L[1][1];
+		ch1[0] = cube.Cube_B[1][2];
+		ch1[1] = cube.Cube_U[1][1];
+		ch1[2] = cube.Cube_L[1][1];
 		CubeCode[8] = iStrSumCode(ch1);	
 
     }
@@ -664,11 +663,12 @@ public class CubeRecoverer {
 		}
 	}
 	
-	protected static boolean CubeCheck(CubeClass cube){
-		boolean check = false;
-		
-		
-		
-		return check;
+	//Final check using recursion
+	protected static void CubeCheck(CubeClass cube){
+		if (cube.Cube_F[1][1] != cube.Cube_F[2][1]){
+			cube.RotateUp(cube);
+			CubeCheck(cube);
+			System.out.print("U");
+		}
 	}
 }

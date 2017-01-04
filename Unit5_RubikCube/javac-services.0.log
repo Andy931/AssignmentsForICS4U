@@ -1,4 +1,4 @@
-SEVERE	?	main	2016-12-23T15:58:32.176Z	org.javacs.Main$4#onError	Can't find configuration file for f:\Andy\Computer Science\EclipseJava\Unit5_RubikCube\src\CubeRecoverer.java
+SEVERE	?	main	2016-12-28T03:36:03.423Z	org.javacs.Main$4#onError	Can't find configuration file for f:\Andy\Computer Science\EclipseJava\Unit5_RubikCube\src\CubeRecoverer.java
 org.javacs.NoJavaConfigException: Can't find configuration file for f:\Andy\Computer Science\EclipseJava\Unit5_RubikCube\src\CubeRecoverer.java
 	at org.javacs.JavaLanguageServer.lambda$findCompiler$21(JavaLanguageServer.java:479)
 	at java.util.Optional.orElseThrow(Unknown Source)
@@ -23,7 +23,7 @@ org.javacs.NoJavaConfigException: Can't find configuration file for f:\Andy\Comp
 	at org.javacs.Main.run(Main.java:150)
 	at org.javacs.Main.main(Main.java:69)
 
-SEVERE	?	main	2016-12-23T15:58:33.093Z	org.javacs.Main$4#onError	Can't find configuration file for f:\Andy\Computer Science\EclipseJava\Unit5_RubikCube\src\CubeRecoverer.java
+SEVERE	?	main	2016-12-28T03:36:04.322Z	org.javacs.Main$4#onError	Can't find configuration file for f:\Andy\Computer Science\EclipseJava\Unit5_RubikCube\src\CubeRecoverer.java
 org.javacs.NoJavaConfigException: Can't find configuration file for f:\Andy\Computer Science\EclipseJava\Unit5_RubikCube\src\CubeRecoverer.java
 	at org.javacs.JavaLanguageServer.lambda$findCompiler$21(JavaLanguageServer.java:479)
 	at java.util.Optional.orElseThrow(Unknown Source)
